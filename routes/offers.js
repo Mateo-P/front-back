@@ -13,12 +13,16 @@ router.get('/', function (req, res, next) {
 });
 
 /* POST offer. */
-router.post('/post',jsonParser, function (req, res, next) {
-    console.log(req.headers)
-    console.log(req.body)
+router.get('/post',jsonParser, function (req, res, next) {
+    console.log(req.query)
+    let name=req.query.name
+    let city=req.query.city
+    let company=req.query.company
+    let salary=req.query.salary
+
     Mongolib.getDatabase(db => {
         if(req.body){
-            Mongolib.createOffer(db, req.body.offer)
+            Mongolib.createOffer(db,{name,city,company,salary})
         }
         
     })
